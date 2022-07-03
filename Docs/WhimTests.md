@@ -39,6 +39,7 @@ NPC -- участник сражения, неигровой персонаж, �
 
 # Доменная модель
 @startuml
+
 left to right direction
 
 class Fighter<<AggregateRoot>> {
