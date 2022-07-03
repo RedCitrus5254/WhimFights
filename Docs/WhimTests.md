@@ -38,7 +38,7 @@ NPC -- участник сражения, неигровой персонаж, �
 |4|ChangeCharacterCommand|character|Изменить характеристики персонажа|
 
 # Доменная модель
-@@ -12,6 +12,8 @@ class B {
+@startuml
 left to right direction
 
 class Fighter<<AggregateRoot>> {
