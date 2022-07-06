@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="Rules" Description="" ToolsVersion="14.0">
+
+    <Rules AnalyzerId="SonarAnalyzer.CSharp" RuleNamespace="SonarAnalyzer.CSharp">
+        <Rule Id="S3881" Action="None" />
+        <Rule Id="S3247" Action="None" />
+    </Rules>
+
+    <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+        <Rule Id="SA0001" Action="None" />
+        <Rule Id="SA1633" Action="None" />
+    </Rules>
+
+    <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers.DocumentationRules">
+        <!-- SA1633: Elements should be documented -->
+        <Rule Id="SA1600" Action="None" />
+        <!-- SA1602: Enumeration items should be documented -->
+        <Rule Id="SA1602" Action="None" />
+    </Rules>
+
+    <Rules AnalyzerId="CSharpGuidelinesAnalyzer" RuleNamespace="CSharpGuidelinesAnalyzer">
+
+        <!-- AV1710: Property 'ContactsSegmentBlock' contains the name of its containing type 'ContactsSegment' -->
+        <Rule Id="AV1710" Action="None"/>
+        <Rule Id="AV1535" Action="None"/>
+        
+        <!-- AV1500: Method 'FilterPredicate.FilterPredicate(FilterField, ComparisonOperator, string, long, uint?, uint?, uint?, string, string, string, string, CampaignActivity?)' contains 12 statements, which exceeds the maximum of 7 statements. -->
+        <Rule Id="AV1500" Action="None" />
+
+        <!-- AV1561: Constructor for 'FilterPredicate' contains 12 parameters, which exceeds the maximum of 3 parameters. -->
+        <Rule Id="AV1561" Action="None" />
+
+        <!-- AV1130: Return type in signature for 'ContactsSegmentBlock.AllPredicates()' should be a collection interface instead of a concrete type. -->
+        <Rule Id="AV1130" Action="None" />
+
+        <!-- AV1564: Parameter 'withSmsChannel' is of type 'bool' -->
+        <Rule Id="AV1564" Action="None" />
+
+        <!-- AV1555: Parameter 'id' in the call to 'Sut.GetContactsSegmentAsync(string)' is invoked with a named argument. -->
+        <Rule Id="AV1555" Action="None" />
+
+        <!-- AV1008: Class 'ContactsSegmentQueryHandlerFactory' should be non-static or its name should be suffixed with 'Extensions'. -->
+        <Rule Id="AV1008" Action="None" />
+    </Rules>
+</RuleSet>

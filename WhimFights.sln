@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{F28949A3-D03B-4827-B75D-3566041F1900}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Private", "Private", "{E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9BB768A7-1296-45A1-9BD4-46A031BEA81E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights", "Private\WhimFights\WhimFights.csproj", "{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.SyncClient", "Private\WhimFights.SyncClient\WhimFights.SyncClient.csproj", "{EBD78FBD-0288-496F-AC0C-8B57952F2050}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.UseCases.Infrastructure", "Private\WhimFights.UseCases.Infrastructure\WhimFights.UseCases.Infrastructure.csproj", "{D9582DA1-195E-4853-AC74-33CBE3CC106D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.UseCases", "Private\WhimFights.UseCases\WhimFights.UseCases.csproj", "{18D67A72-47F1-4C39-85D7-61F296F6206D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.Tests", "Tests\WhimFights.Tests\WhimFights.Tests.csproj", "{D78C6EE6-4625-4ACC-8214-1A03367D16E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD78FBD-0288-496F-AC0C-8B57952F2050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD78FBD-0288-496F-AC0C-8B57952F2050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD78FBD-0288-496F-AC0C-8B57952F2050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD78FBD-0288-496F-AC0C-8B57952F2050}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9582DA1-195E-4853-AC74-33CBE3CC106D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9582DA1-195E-4853-AC74-33CBE3CC106D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9582DA1-195E-4853-AC74-33CBE3CC106D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9582DA1-195E-4853-AC74-33CBE3CC106D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D67A72-47F1-4C39-85D7-61F296F6206D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D67A72-47F1-4C39-85D7-61F296F6206D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D67A72-47F1-4C39-85D7-61F296F6206D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D67A72-47F1-4C39-85D7-61F296F6206D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
+		{EBD78FBD-0288-496F-AC0C-8B57952F2050} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
+		{D9582DA1-195E-4853-AC74-33CBE3CC106D} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
+		{18D67A72-47F1-4C39-85D7-61F296F6206D} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
+		{D78C6EE6-4625-4ACC-8214-1A03367D16E6} = {9BB768A7-1296-45A1-9BD4-46A031BEA81E}
+	EndGlobalSection
+EndGlobal
