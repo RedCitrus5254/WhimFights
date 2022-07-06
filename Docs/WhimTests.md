@@ -94,6 +94,7 @@ Fighter "1" -- "1" Character : R1
 Statistics "1" -- "2" FighterStatistics : R2
 
 ```
+![Domain model](https://www.planttext.com/api/plantuml/png/nLDDQm8n4BtdLmnUMmzw32AA8Ev5HQ7tc8nh82OocMqHyRytwdweNQ67GdC9UVDcvatoCegiY8kz4yBXbe43aCrt3COIQhR12w6TYX6c5nXfC1ZdEM6k65SXy7089m5flK5cP4NA39ooSualaMBmijp5MGXGcyYaDCEjz6IdBYUaXrhN8k-mwjM5A7nXZ1Aivn9QV2BfuBVMeDTu7rcxetyYJvsoT0FErLHBfuv8lnGmL_lK8qctFlzxJJTWfkAwE1m2iOHD2AwHEbzE_bDUhMFDYcrag-DhBpISMccbScefSkcJXYPVu5KzJ99DIzQBG9as2ONdnVOQZazZ_CYfnTScRlVpXzKSoEB3HOtJhQeSPwWSxoIOK6mSNferrkhqEj3jNhSdrxMJqdkBilyzt71bUdjnfxyYzJijmoLoNuWHUfC--pS0)
 - `R1`: Боец содержит одного персонажа
 - `R2`: Статистика содержит две статистики каждого из бойцов
 
@@ -102,6 +103,7 @@ Statistics "1" -- "2" FighterStatistics : R2
 
 # Стимулы
 |№|Название|Параметры|Описание|
+:-|:-------|:--------|:-------|
 |1|SaveCharacter|character|Создать персонажа|
 |2|ChangeCharacter|character|Изменить характеристики персонажа|
 |3|GetCharacter|id|Получить персонажа|
@@ -110,6 +112,7 @@ Statistics "1" -- "2" FighterStatistics : R2
 
 # Тестовые цепочки
 |№|Цепочка|Описание|Требование|
+:-|:------|:-------|:---------|
 |1|S1|Создаются 2 персонажа;Проводится заданное количество сражений;В статистике сумма количества побед персонажей == заданному количеству сражений|R2|
 |2|S2|Создать персонажа;Сохранить его;Достать из файла персонажа с тем же id; Персонажи должны быть одинаковыми|R3|
 |3|S3|Создать персонажа;Изменить его храрактеристики;Достать персонажа из файла;Характеристики должны быть изменены|R5|
