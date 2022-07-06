@@ -49,9 +49,5 @@ coverage.cobertura.json
 
 _CoverageReport
 
-#launchSettings files
-Apps/RetailRocket.ProductCatalog.Downloader.App/Properties/launchSettings.json
-Tests/RetailRocket.ProductCatalog.Testing/Properties/launchSettings.json
-
 configuration.json
 singlefile
