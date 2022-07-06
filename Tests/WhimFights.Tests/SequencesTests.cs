@@ -8,5 +8,20 @@ namespace WhimFights.Tests
         public void S1()
         {
         }
+
+        [Fact]
+        public void S2()
+        {
+        }
+
+        [Fact]
+        public void S3()
+        {
+        }
+
+        [Fact]
+        public void S4()
+        {
+        }
     }
 }
