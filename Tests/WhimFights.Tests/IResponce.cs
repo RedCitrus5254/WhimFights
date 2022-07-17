@@ -6,4 +6,7 @@ namespace WhimFights.Tests
 
     public record FightStatistics(
         Statistics Statistics) : IResponce;
+
+    public record ReceivedCharacter(
+        WhimFights.Character Character) : IResponce;
 }
