@@ -9,7 +9,8 @@
             int slyness,
             int overconfidence,
             int flair,
-            int hp)
+            int hp,
+            bool hasSupport)
             : base(
                 id: id,
                 prowess: prowess,
@@ -18,6 +19,9 @@
                 flair: flair,
                 hp: hp)
         {
+            this.HasSupport = hasSupport;
         }
+
+        public bool HasSupport { get; }
     }
 }

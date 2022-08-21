@@ -59,8 +59,8 @@ namespace WhimFights.Tests
             sut.Responces
                 .FirstOrDefault()
                 .Should()
-                .BeEquivalentTo(
-                    expectation: new ReceivedCharacter(
+                .NotBeEquivalentTo(
+                    unexpected: new ReceivedCharacter(
                         Character: expected));
         }
 
@@ -88,8 +88,8 @@ namespace WhimFights.Tests
             sut.Responces
                 .FirstOrDefault()
                 .Should()
-                .BeEquivalentTo(
-                    expectation: new ReceivedCharacter(
+                .NotBeEquivalentTo(
+                    unexpected: new ReceivedCharacter(
                     Character: expected));
         }
 
@@ -121,8 +121,8 @@ namespace WhimFights.Tests
             sut.Responces
                 .FirstOrDefault()
                 .Should()
-                .BeEquivalentTo(
-                    expectation: new FightStatistics(
+                .NotBeEquivalentTo(
+                    unexpected: new FightStatistics(
                         Statistics: new Statistics(
                         countOfFights: 1)));
         }

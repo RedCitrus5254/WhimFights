@@ -10,7 +10,8 @@
             int? slyness = default,
             int? overconfidence = default,
             int? flair = default,
-            int? hp = default)
+            int? hp = default,
+            bool hasSupport = false)
         {
             var random = new Random();
 
@@ -28,7 +29,8 @@
                 slyness: characterSlyness,
                 overconfidence: characterOverconfidence,
                 flair: characterFlair,
-                hp: characterHp);
+                hp: characterHp,
+                hasSupport: hasSupport);
         }
     }
 }
