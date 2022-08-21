@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Private\WhimFights.UseCases.Infrastructure\WhimFights.UseCases.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Private\WhimFights.UseCases\WhimFights.UseCases.csproj" />
       <ProjectReference Include="..\..\Private\WhimFights\WhimFights.csproj" />
     </ItemGroup>

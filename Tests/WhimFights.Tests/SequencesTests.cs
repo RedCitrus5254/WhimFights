@@ -16,7 +16,7 @@ namespace WhimFights.Tests
             var firstCharacter = ObjectsGen.RandomCharacter();
             var secondCharacter = ObjectsGen.RandomCharacter();
 
-            var sut = new Sut();
+            var sut = Sut.Create();
 
             var countOfFights = random.Next(1, 10);
 
@@ -45,7 +45,7 @@ namespace WhimFights.Tests
         {
             var expected = ObjectsGen.RandomCharacter();
 
-            var sut = new Sut();
+            var sut = Sut.Create();
 
             sut.AcceptStimuli(
                 stimuli: new List<IStimulus>()
@@ -72,7 +72,7 @@ namespace WhimFights.Tests
             var expected = ObjectsGen.RandomCharacter(
                 id: character.Id);
 
-            var sut = new Sut();
+            var sut = Sut.Create();
 
             sut.AcceptStimuli(
                 stimuli: new List<IStimulus>()
@@ -107,7 +107,7 @@ namespace WhimFights.Tests
                 flair: 999,
                 hp: 1);
 
-            var sut = new Sut();
+            var sut = Sut.Create();
 
             sut.AcceptStimuli(
                 stimuli: new List<IStimulus>()
@@ -125,6 +125,31 @@ namespace WhimFights.Tests
                     unexpected: new FightStatistics(
                         Statistics: new Statistics(
                         countOfFights: 1)));
+        }
+
+        [Fact]
+        public void S5()
+        {
+            var character = ObjectsGen
+                .RandomCharacter();
+
+            var sut = Sut.Create();
+
+            sut.AcceptStimuli(
+                stimuli: new List<IStimulus>()
+                {
+                    new SaveCharacter(
+                        Character: character),
+                    new GetCharacter(
+                        CharacterId: character.Id),
+                });
+
+            sut
+                .Responces
+                .FirstOrDefault()
+                .Should()
+                .BeEquivalentTo(
+                    expectation: character);
         }
     }
 }
