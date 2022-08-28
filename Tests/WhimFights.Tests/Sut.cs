@@ -8,6 +8,8 @@
     {
         private readonly SaveCharacterCommand.IHandler saveCharacterCommandHandler;
 
+        private readonly GetCharacterQuery.IHandler getCharacterQueryHandler;
+
         private Sut(
             SaveCharacterCommand.IHandler saveCharacterCommandHandler)
         {
@@ -47,7 +49,11 @@
                     break;
                 case ChangeCharacter:
                     break;
-                case GetCharacter:
+                case GetCharacter getCharacter:
+                    var character = this.getCharacterQueryHandler
+                                        .Handle(
+                                            characterId: getCharacter.CharacterId);
+                    Responces.Add(ReceivedCharacter(character));
                     break;
                 case GetFightResult:
                     break;

@@ -4,5 +4,8 @@
     {
         void Save(
             Character character);
+
+        Character Get(
+            string id);
     }
 }
