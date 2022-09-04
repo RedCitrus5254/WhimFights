@@ -11,9 +11,11 @@
         private readonly GetCharacterQuery.IHandler getCharacterQueryHandler;
 
         private Sut(
-            SaveCharacterCommand.IHandler saveCharacterCommandHandler)
+            SaveCharacterCommand.IHandler saveCharacterCommandHandler,
+            GetCharacterQuery.IHandler getCharacterQueryHandler)
         {
             this.saveCharacterCommandHandler = saveCharacterCommandHandler;
+            this.getCharacterQueryHandler = getCharacterQueryHandler;
         }
 
         public List<IResponce> Responces { get; set; } = new List<IResponce>();
@@ -23,6 +25,8 @@
             var characterMapper = new CharacterMapper();
             return new Sut(
                 saveCharacterCommandHandler: new SaveCharacterCommandHandler(
+                    characterMapper: characterMapper),
+                getCharacterQueryHandler: new GetCharacterQueryHandler(
                     characterMapper: characterMapper));
         }
 
@@ -49,12 +53,15 @@
                     break;
                 case ChangeCharacter:
                     break;
+
                 case GetCharacter getCharacter:
                     var character = this.getCharacterQueryHandler
                                         .Handle(
-                                            characterId: getCharacter.CharacterId);
-                    Responces.Add(ReceivedCharacter(character));
+                                            query: new GetCharacterQuery(
+                                                id: getCharacter.CharacterId));
+                    this.Responces.Add(new ReceivedCharacter(character));
                     break;
+
                 case GetFightResult:
                     break;
                 case GetAllCharacters:

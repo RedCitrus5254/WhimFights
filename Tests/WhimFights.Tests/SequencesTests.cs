@@ -59,8 +59,8 @@ namespace WhimFights.Tests
             sut.Responces
                 .FirstOrDefault()
                 .Should()
-                .NotBeEquivalentTo(
-                    unexpected: new ReceivedCharacter(
+                .BeEquivalentTo(
+                    expectation: new ReceivedCharacter(
                         Character: expected));
         }
 
@@ -149,7 +149,7 @@ namespace WhimFights.Tests
                 .FirstOrDefault()
                 .Should()
                 .BeEquivalentTo(
-                    expectation: character);
+                    expectation: new ReceivedCharacter(character));
         }
     }
 }
