@@ -3,6 +3,7 @@ namespace WhimFights.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using FluentAssertions;
     using Xunit;
 
@@ -125,6 +126,15 @@ namespace WhimFights.Tests
                     unexpected: new FightStatistics(
                         Statistics: new Statistics(
                         countOfFights: 1)));
+        }
+
+        [Fact]
+        public void S6()
+        {
+            var firstCharacter = ObjectsGen.RandomCharacter();
+            var secondCharacter = ObjectsGen.RandomCharacter();
+            
+            var sut = 
         }
     }
 }
