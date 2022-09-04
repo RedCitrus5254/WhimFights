@@ -1,5 +1,7 @@
 namespace WhimFights.Tests
 {
+    using System.Collections.Generic;
+
     public interface IResponce
     {
     }
@@ -9,4 +11,7 @@ namespace WhimFights.Tests
 
     public record ReceivedCharacter(
         WhimFights.Character Character) : IResponce;
+
+    public record ReceivedCharacters(
+        List<Character> Characters) : IResponce;
 }
