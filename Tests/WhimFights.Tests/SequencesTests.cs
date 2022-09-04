@@ -131,31 +131,6 @@ namespace WhimFights.Tests
         [Fact]
         public void S5()
         {
-            var character = ObjectsGen
-                .RandomCharacter();
-
-            var sut = Sut.Create();
-
-            sut.AcceptStimuli(
-                stimuli: new List<IStimulus>()
-                {
-                    new SaveCharacter(
-                        Character: character),
-                    new GetCharacter(
-                        CharacterId: character.Id),
-                });
-
-            sut
-                .Responces
-                .FirstOrDefault()
-                .Should()
-                .BeEquivalentTo(
-                    expectation: new ReceivedCharacter(character));
-        }
-
-        [Fact]
-        public void S6()
-        {
             var firstCharacter = ObjectsGen.RandomCharacter();
             var secondCharacter = ObjectsGen.RandomCharacter();
 
