@@ -3,6 +3,7 @@ namespace WhimFights.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using FluentAssertions;
     using Xunit;
 
@@ -130,8 +131,8 @@ namespace WhimFights.Tests
         [Fact]
         public void S5()
         {
-            var character = ObjectsGen
-                .RandomCharacter();
+            var firstCharacter = ObjectsGen.RandomCharacter();
+            var secondCharacter = ObjectsGen.RandomCharacter();
 
             var sut = Sut.Create();
 
@@ -139,17 +140,25 @@ namespace WhimFights.Tests
                 stimuli: new List<IStimulus>()
                 {
                     new SaveCharacter(
-                        Character: character),
-                    new GetCharacter(
-                        CharacterId: character.Id),
+                        Character: firstCharacter),
+                    new SaveCharacter(
+                        Character: secondCharacter),
+                    new GetAllCharacters(),
+                });
+
+            var expected = new ReceivedCharacters(
+                new List<Character>()
+                {
+                    firstCharacter,
+                    secondCharacter,
                 });
 
             sut
                 .Responces
-                .FirstOrDefault()
+                .First()
                 .Should()
                 .BeEquivalentTo(
-                    expectation: new ReceivedCharacter(character));
+                    expectation: expected);
         }
     }
 }

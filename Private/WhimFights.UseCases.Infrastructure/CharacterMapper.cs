@@ -14,6 +14,11 @@
             return this.characters.First(character => character.Id == id);
         }
 
+        public List<Character> GetAll()
+        {
+            return this.characters;
+        }
+
         public void Save(
             Character character)
         {
