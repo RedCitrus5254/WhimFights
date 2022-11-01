@@ -3,7 +3,6 @@ namespace WhimFights.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using FluentAssertions;
     using Xunit;
 
@@ -89,8 +88,8 @@ namespace WhimFights.Tests
             sut.Responces
                 .FirstOrDefault()
                 .Should()
-                .NotBeEquivalentTo(
-                    unexpected: new ReceivedCharacter(
+                .BeEquivalentTo(
+                    expectation: new ReceivedCharacter(
                     Character: expected));
         }
 
