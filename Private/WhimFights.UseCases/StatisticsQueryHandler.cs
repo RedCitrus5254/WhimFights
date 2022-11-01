@@ -1,12 +1,18 @@
 ﻿namespace WhimFights.UseCases
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using WhimFights.UseCases.Ports;
 
     public class StatisticsQueryHandler : StatisticsQuery.IHandler
     {
-        private readonly Random random = new Random();
+        private readonly IDice dice;
+
+        public StatisticsQueryHandler(
+            IDice dice)
+        {
+            this.dice = dice;
+        }
 
         public async Task<Statistics> HandleAsync(
             StatisticsQuery query)
@@ -56,8 +62,8 @@
             {
                 return new Fighter(
                     id: character.Id,
-                    prowess: character.Prowess + 2 + this.random.Next(1, 6),
-                    slyness: character.Slyness + 2 + this.random.Next(1, 6),
+                    prowess: character.Prowess + 2 + this.dice.Throw1To6(),
+                    slyness: character.Slyness + 2 + this.dice.Throw1To6(),
                     overconfidence: character.Overconfidence,
                     flair: character.Flair,
                     hp: character.Hp + 10);
@@ -76,8 +82,8 @@
             Fighter attacker,
             Fighter defender)
         {
-            var attackerOverconfidence = attacker.Overconfidence + (2 * this.random.Next(1, 6));
-            var defenderSlyness = defender.Flair + (2 * this.random.Next(1, 6));
+            var attackerOverconfidence = attacker.Overconfidence + (2 * this.dice.Throw1To6());
+            var defenderSlyness = defender.Flair + (2 * this.dice.Throw1To6());
 
             Fighter hittingFirst;
             Fighter hittingSecond;
@@ -124,8 +130,8 @@
             Fighter hitting,
             Fighter blocking)
         {
-            var attack = hitting.Prowess + (2 * this.random.Next(1, 6));
-            var defence = blocking.Slyness + (2 * this.random.Next(1, 6));
+            var attack = hitting.Prowess + (2 * this.dice.Throw1To6());
+            var defence = blocking.Slyness + (2 * this.dice.Throw1To6());
 
             var damage = attack - defence;
 
