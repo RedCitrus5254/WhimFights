@@ -6,23 +6,23 @@
 
     public class CharacterMapper : ICharacterMapper
     {
-        private readonly List<Character> characters = new List<Character>();
+        private readonly Dictionary<string, Character> characters = new Dictionary<string, Character>();
 
         public Character Get(
             string id)
         {
-            return this.characters.First(character => character.Id == id);
+            return this.characters[id];
         }
 
         public List<Character> GetAll()
         {
-            return this.characters;
+            return this.characters.Values.ToList();
         }
 
         public void Save(
             Character character)
         {
-            this.characters.Add(character);
+            this.characters[character.Id] = character;
         }
     }
 }

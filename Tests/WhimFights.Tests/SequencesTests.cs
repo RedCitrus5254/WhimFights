@@ -87,9 +87,9 @@ namespace WhimFights.Tests
             sut.Responces
                 .FirstOrDefault()
                 .Should()
-                .NotBeEquivalentTo(
-                    unexpected: new ReceivedCharacter(
-                        Character: expected));
+                .BeEquivalentTo(
+                    expectation: new ReceivedCharacter(
+                    Character: expected));
         }
 
         [Theory]
