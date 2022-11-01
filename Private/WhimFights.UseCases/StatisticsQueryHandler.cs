@@ -14,28 +14,34 @@
             var tasks = Enumerable.Range(0, query.FightsCount).Select(
                 _ => Task.Run(() =>
                     this.GetFighterStatistics(
-                        first: this.CreateFighter(query.Attaker),
-                        second: this.CreateFighter(query.Defender))));
+                        attacker: this.CreateFighter(query.Attaker),
+                        defender: this.CreateFighter(query.Defender))));
 
             var fights = (await Task.WhenAll(tasks)
                     .ConfigureAwait(false))
                 .ToList();
 
-            var attackerFights = fights
+            var attackerFightsWins = fights
                 .Where(fighter => fighter.WinnerId == query.Attaker.Id)
                 .ToList();
+            var attackerWinsAverageHealth = attackerFightsWins.Count > 0
+                ? attackerFightsWins.Sum(fighter => fighter.WinnerHp) / attackerFightsWins.Count
+                : -1;
             var attackerFightStatistics = new FighterStatistics(
                 fighterId: query.Attaker.Id,
-                victories: attackerFights.Count,
-                averageHealth: attackerFights.Sum(fighter => fighter.WinnerHp) / attackerFights.Count);
+                victories: attackerFightsWins.Count,
+                averageHealth: attackerWinsAverageHealth);
 
-            var defenderFights = fights
+            var defenderFightWins = fights
                 .Where(fighter => fighter.WinnerId == query.Defender.Id)
                 .ToList();
+            var defenderWinsAverageHealth = defenderFightWins.Count > 0
+                ? defenderFightWins.Sum(fighter => fighter.WinnerHp) / defenderFightWins.Count
+                : -1;
             var defenderFightStatistics = new FighterStatistics(
                 fighterId: query.Defender.Id,
-                victories: defenderFights.Count,
-                averageHealth: defenderFights.Sum(fighter => fighter.WinnerHp) / defenderFights.Count);
+                victories: defenderFightWins.Count,
+                averageHealth: defenderWinsAverageHealth);
 
             return new Statistics(
                 countOfFights: query.FightsCount,
@@ -67,24 +73,24 @@
         }
 
         private OneFightStatistics GetFighterStatistics(
-            Fighter first,
-            Fighter second)
+            Fighter attacker,
+            Fighter defender)
         {
-            var firstFighterOverconfidence = first.Overconfidence + (2 * this.random.Next(1, 6));
-            var secondFighterSlyness = second.Flair + (2 * this.random.Next(1, 6));
+            var attackerOverconfidence = attacker.Overconfidence + (2 * this.random.Next(1, 6));
+            var defenderSlyness = defender.Flair + (2 * this.random.Next(1, 6));
 
             Fighter hittingFirst;
             Fighter hittingSecond;
 
-            if (firstFighterOverconfidence >= secondFighterSlyness)
+            if (attackerOverconfidence >= defenderSlyness)
             {
-                hittingFirst = first;
-                hittingSecond = second;
+                hittingFirst = attacker;
+                hittingSecond = defender;
             }
             else
             {
-                hittingFirst = second;
-                hittingSecond = first;
+                hittingFirst = defender;
+                hittingSecond = attacker;
             }
 
             while (hittingFirst.IsAlive() && hittingSecond.IsAlive())
@@ -103,15 +109,15 @@
                     blocking: hittingFirst);
             }
 
-            var isFirstWon = first.IsAlive();
+            var isAttackerWon = attacker.IsAlive();
 
-            return isFirstWon
+            return isAttackerWon
                 ? new OneFightStatistics(
-                    winnerId: first.Id,
-                    winnerHp: first.Hp)
+                    winnerId: attacker.Id,
+                    winnerHp: attacker.Hp)
                 : new OneFightStatistics(
-                    winnerId: second.Id,
-                    winnerHp: second.Hp);
+                    winnerId: defender.Id,
+                    winnerHp: defender.Hp);
         }
 
         private void Punch(
@@ -167,7 +173,14 @@
             public void DecreaseHp(
                 int value)
             {
-                this.Hp -= value;
+                if (this.Hp - value < 0)
+                {
+                    this.Hp = 0;
+                }
+                else
+                {
+                    this.Hp -= value;
+                }
             }
         }
 

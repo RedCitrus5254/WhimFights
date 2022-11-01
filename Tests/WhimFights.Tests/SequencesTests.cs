@@ -3,51 +3,50 @@ namespace WhimFights.Tests
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using FluentAssertions;
     using Xunit;
 
     public class SequencesTests
     {
         [Fact]
-        public void S1()
+        public async Task S1()
         {
             var random = new Random();
 
-            var firstCharacter = ObjectsGen.RandomCharacter();
-            var secondCharacter = ObjectsGen.RandomCharacter();
+            var attacker = ObjectsGen.RandomCharacter();
+            var defender = ObjectsGen.RandomCharacter();
 
             var sut = Sut.Create();
 
             var countOfFights = random.Next(1, 10);
 
-            sut.AcceptStimuli(
+            await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()
                 {
                     new GetFightResult(
-                        FirstCharacter: firstCharacter,
-                        SecondCharacter: secondCharacter,
-                        CountOfFights: countOfFights),
+                        Attacker: attacker,
+                        Defender: defender,
+                        FightsCount: countOfFights),
                 });
 
-            var expectation = new FightStatistics(
-                Statistics: new Statistics(
-                    countOfFights: countOfFights));
+            var statistics = (FightStatistics)sut.Responces.First();
 
-            sut
-                .Responces
-                .FirstOrDefault()
+            var actualVictoriesCount = statistics.Statistics.FirstFighterStatistics.Victories + statistics.Statistics.SecondFighterStatistics.Victories;
+
+            actualVictoriesCount
                 .Should()
-                .NotBeEquivalentTo(expectation);
+                .Be(countOfFights);
         }
 
         [Fact]
-        public void S2()
+        public async Task S2()
         {
             var expected = ObjectsGen.RandomCharacter();
 
             var sut = Sut.Create();
 
-            sut.AcceptStimuli(
+            await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()
                 {
                     new SaveCharacter(
@@ -65,7 +64,7 @@ namespace WhimFights.Tests
         }
 
         [Fact]
-        public void S3()
+        public async Task S3()
         {
             var character = ObjectsGen.RandomCharacter();
 
@@ -74,7 +73,7 @@ namespace WhimFights.Tests
 
             var sut = Sut.Create();
 
-            sut.AcceptStimuli(
+            await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()
                 {
                     new SaveCharacter(
@@ -90,17 +89,21 @@ namespace WhimFights.Tests
                 .Should()
                 .NotBeEquivalentTo(
                     unexpected: new ReceivedCharacter(
-                    Character: expected));
+                        Character: expected));
         }
 
-        [Fact]
-        public void S4()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async Task S4Async(
+            bool attackerHasSupport)
         {
             var attackingCharacter = ObjectsGen.RandomCharacter(
                 prowess: 5,
                 slyness: 5,
                 overconfidence: 1,
-                hp: 1);
+                hp: 1,
+                hasSupport: attackerHasSupport);
             var defendingCharacter = ObjectsGen.RandomCharacter(
                 prowess: 6,
                 slyness: 6,
@@ -109,33 +112,39 @@ namespace WhimFights.Tests
 
             var sut = Sut.Create();
 
-            sut.AcceptStimuli(
+            await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()
                 {
                     new GetFightResult(
-                        FirstCharacter: attackingCharacter,
-                        SecondCharacter: defendingCharacter,
-                        CountOfFights: 1),
+                        Attacker: attackingCharacter,
+                        Defender: defendingCharacter,
+                        FightsCount: 1),
                 });
 
-            sut.Responces
-                .FirstOrDefault()
+            var expectedAttackerWins = attackerHasSupport
+                ? 1
+                : 0;
+
+            var statistics = (FightStatistics)sut.Responces
+                .First();
+
+            statistics
+                .Statistics
+                .FirstFighterStatistics
+                .Victories
                 .Should()
-                .NotBeEquivalentTo(
-                    unexpected: new FightStatistics(
-                        Statistics: new Statistics(
-                        countOfFights: 1)));
+                .Be(expectedAttackerWins);
         }
 
         [Fact]
-        public void S5()
+        public async Task S5()
         {
             var firstCharacter = ObjectsGen.RandomCharacter();
             var secondCharacter = ObjectsGen.RandomCharacter();
 
             var sut = Sut.Create();
 
-            sut.AcceptStimuli(
+            await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()
                 {
                     new SaveCharacter(
