@@ -18,6 +18,8 @@
             this.Hp = hp;
         }
 
+        public int Hp { get; }
+
         public string Id { get; }
 
         public int Prowess { get; }
@@ -27,7 +29,5 @@
         public int Overconfidence { get; }
 
         public int Flair { get; }
-
-        public int Hp { get; }
     }
 }
