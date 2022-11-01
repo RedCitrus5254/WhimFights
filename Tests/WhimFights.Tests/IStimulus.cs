@@ -14,9 +14,9 @@ namespace WhimFights.Tests
         string CharacterId) : IStimulus;
 
     public record GetFightResult(
-        Character FirstCharacter,
-        Character SecondCharacter,
-        int CountOfFights) : IStimulus;
+        Character Attacker,
+        Character Defender,
+        int FightsCount) : IStimulus;
 
     public record GetAllCharacters() : IStimulus;
 }
