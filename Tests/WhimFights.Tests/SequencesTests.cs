@@ -5,6 +5,7 @@ namespace WhimFights.Tests
     using System.Linq;
     using System.Threading.Tasks;
     using FluentAssertions;
+    using WhimFights.Tests.Fakes;
     using Xunit;
 
     public class SequencesTests
@@ -17,7 +18,9 @@ namespace WhimFights.Tests
             var attacker = ObjectsGen.RandomCharacter();
             var defender = ObjectsGen.RandomCharacter();
 
-            var sut = Sut.Create();
+            var sut = Sut.Create(
+                dice: new FakeDice(
+                    predefinedValue: random.Next(1, 6)));
 
             var countOfFights = random.Next(1, 10);
 
@@ -98,6 +101,8 @@ namespace WhimFights.Tests
         public async Task S4Async(
             bool attackerHasSupport)
         {
+            var random = new Random();
+
             var attacker = ObjectsGen.RandomCharacter(
                 prowess: 5,
                 slyness: 5,
@@ -110,7 +115,9 @@ namespace WhimFights.Tests
                 flair: 999,
                 hp: 1);
 
-            var sut = Sut.Create();
+            var sut = Sut.Create(
+                dice: new FakeDice(
+                    predefinedValue: random.Next(1, 6)));
 
             await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()

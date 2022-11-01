@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using WhimFights.UseCases;
     using WhimFights.UseCases.Infrastructure;
+    using WhimFights.UseCases.Ports;
 
     public class Sut
     {
@@ -26,7 +27,8 @@
 
         public List<IResponce> Responces { get; set; } = new List<IResponce>();
 
-        public static Sut Create()
+        public static Sut Create(
+            IDice? dice = null)
         {
             var characterMapper = new CharacterMapper();
             return new Sut(
@@ -36,7 +38,8 @@
                     characterMapper: characterMapper),
                 getAllCharactersQueryHandler: new GetAllCharactersQueryHandler(
                     characterMapper: characterMapper),
-                statisticsQueryHandler: new StatisticsQueryHandler());
+                statisticsQueryHandler: new StatisticsQueryHandler(
+                    dice: dice ?? new Dice()));
         }
 
         public async Task AcceptStimuliAsync(
