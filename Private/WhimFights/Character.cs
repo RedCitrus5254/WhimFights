@@ -18,7 +18,7 @@
             this.Hp = hp;
         }
 
-        public int Hp { get; set; }
+        public int Hp { get; }
 
         public string Id { get; }
 

@@ -98,13 +98,13 @@ namespace WhimFights.Tests
         public async Task S4Async(
             bool attackerHasSupport)
         {
-            var attackingCharacter = ObjectsGen.RandomCharacter(
+            var attacker = ObjectsGen.RandomCharacter(
                 prowess: 5,
                 slyness: 5,
                 overconfidence: 1,
                 hp: 1,
                 hasSupport: attackerHasSupport);
-            var defendingCharacter = ObjectsGen.RandomCharacter(
+            var defender = ObjectsGen.RandomCharacter(
                 prowess: 6,
                 slyness: 6,
                 flair: 999,
@@ -116,8 +116,8 @@ namespace WhimFights.Tests
                 stimuli: new List<IStimulus>()
                 {
                     new GetFightResult(
-                        Attacker: attackingCharacter,
-                        Defender: defendingCharacter,
+                        Attacker: attacker,
+                        Defender: defender,
                         FightsCount: 1),
                 });
 
