@@ -1,5 +1,7 @@
 ﻿namespace WhimFights.UseCases
 {
+    using System.Threading.Tasks;
+
     public class SaveCharacterCommand
     {
         public SaveCharacterCommand(
@@ -10,7 +12,7 @@
 
         public interface IHandler
         {
-            void Handle(
+            Task Handle(
                 SaveCharacterCommand command);
         }
 

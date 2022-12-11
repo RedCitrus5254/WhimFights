@@ -1,6 +1,8 @@
 ﻿namespace WhimFights.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
     using WhimFights.UseCases;
     using WhimFights.UseCases.Infrastructure;
@@ -30,7 +32,10 @@
         public static Sut Create(
             IDice? dice = null)
         {
-            var characterMapper = new CharacterMapper();
+            var filename = Guid.NewGuid().ToString();
+            using var fs = File.Create(filename);
+            var characterMapper = new CharacterMapper(
+                filePath: filename);
             return new Sut(
                 saveCharacterCommandHandler: new SaveCharacterCommandHandler(
                     characterMapper: characterMapper),
@@ -59,19 +64,22 @@
             switch (stimulus)
             {
                 case SaveCharacter saveCharacter:
-                    this.saveCharacterCommandHandler
+                    await this.saveCharacterCommandHandler
                         .Handle(
                             command: new SaveCharacterCommand(
-                                character: saveCharacter.Character));
+                                character: saveCharacter.Character))
+                        .ConfigureAwait(false);
                     break;
                 case ChangeCharacter:
                     break;
 
                 case GetCharacter getCharacter:
-                    var character = this.getCharacterQueryHandler
+                    var character = await this.getCharacterQueryHandler
                         .Handle(
                             query: new GetCharacterQuery(
-                                id: getCharacter.CharacterId));
+                                id: getCharacter.CharacterId))
+                        .ConfigureAwait(false);
+
                     this.Responces.Add(new ReceivedCharacter(character));
                     break;
 
@@ -89,9 +97,10 @@
                     break;
 
                 case GetAllCharacters:
-                    var characters = this.getAllCharactersQueryHandler
+                    var characters = await this.getAllCharactersQueryHandler
                         .Handle(
-                            query: new GetAllCharactersQuery());
+                            query: new GetAllCharactersQuery())
+                        .ConfigureAwait(false);
 
                     this.Responces.Add(
                         item: new ReceivedCharacters(

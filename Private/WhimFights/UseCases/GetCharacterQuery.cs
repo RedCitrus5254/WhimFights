@@ -1,5 +1,7 @@
 ﻿namespace WhimFights.UseCases
 {
+    using System.Threading.Tasks;
+
     public class GetCharacterQuery
     {
         public GetCharacterQuery(
@@ -10,7 +12,7 @@
 
         public interface IHandler
         {
-            Character Handle(
+            Task<Character> Handle(
                 GetCharacterQuery query);
         }
 

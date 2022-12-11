@@ -15,14 +15,18 @@ namespace WhimFights.Tests
         {
             var random = new Random();
 
-            var attacker = ObjectsGen.RandomCharacter();
-            var defender = ObjectsGen.RandomCharacter();
+            var attacker = ObjectsGen.RandomCharacter(
+                prowess: random.Next(5, 10),
+                slyness: random.Next(1, 4));
+            var defender = ObjectsGen.RandomCharacter(
+                prowess: random.Next(5, 10),
+                slyness: random.Next(1, 4));
 
             var sut = Sut.Create(
                 dice: new FakeDice(
                     predefinedValue: random.Next(1, 6)));
 
-            var countOfFights = random.Next(1, 10);
+            var countOfFights = random.Next(1, 2);
 
             await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()

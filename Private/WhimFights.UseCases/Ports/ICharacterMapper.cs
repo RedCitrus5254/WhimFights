@@ -1,15 +1,16 @@
 ﻿namespace WhimFights.UseCases.Ports
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface ICharacterMapper
     {
-        void Save(
+        Task SaveAsync(
             Character character);
 
-        Character Get(
+        Task<Character> GetAsync(
             string id);
 
-        List<Character> GetAll();
+        Task<List<Character>> GetAllAsync();
     }
 }
