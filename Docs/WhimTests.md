@@ -41,10 +41,9 @@ NPC -- участник сражения, неигровой персонаж, �
 # Варианты использования
 |№|Название|Параметры|Описание|
 :-|:-------|:--------|:-------|
-|1|OneToOneFightsResultQuery|firstFighter, secondFighter, fightsCount|Провести сражение между firstFighter и secondFighter fightsCount раз и вернуть статистику|
+|1|StatisticsQuery|attacker, defender, fightsCount|Провести сражение между attacker и defender fightsCount раз и вернуть статистику|
 |2|CharactersQuery|filePath|Прочитать файл и взять из него персонажей и их характеристики|
 |3|CreateCharacterCommand|character|Добавить персонажа в файл|
-|4|ChangeCharacterCommand|character|Изменить характеристики персонажа|
 
 # Доменная модель
 ```plantuml
@@ -84,8 +83,8 @@ class NPC {
 
 class Statistics<<AggregateRoot>> {
     + StatisticsId: Id {I}
-    + FirstFighterStatistics: FirstFighterStatistics
-    + SecondFighterStatistics: SecondFighterStatistics
+    + AttackerStatistics: AttackerStatistics
+    + DefenderStatistics: DefenderStatistics
     + CountOfFights: int
 }
 
@@ -114,7 +113,7 @@ Statistics "1" -- "2" FighterStatistics : R2
 |1|SaveCharacter|character|Создать персонажа|
 |2|ChangeCharacter|character|Изменить характеристики персонажа|
 |3|GetCharacter|id|Получить персонажа|
-|4|GetFightResult|firstCharacter, secondCharacter, countOfFights|Получить статистику по сражению персонажей|
+|4|StatisticsQuery|attacker, defender, countOfFights|Получить статистику по сражению персонажей|
 |5|GetAllCharacters||Получить всех персонажей|
 
 # Тестовые цепочки

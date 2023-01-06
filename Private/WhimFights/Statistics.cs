@@ -4,18 +4,18 @@
     {
         public Statistics(
             int countOfFights,
-            FighterStatistics firstFighterStatistics,
-            FighterStatistics secondFighterStatistics)
+            FighterStatistics attackerStatistics,
+            FighterStatistics defenderStatistics)
         {
             this.CountOfFights = countOfFights;
-            this.FirstFighterStatistics = firstFighterStatistics;
-            this.SecondFighterStatistics = secondFighterStatistics;
+            this.AttackerStatistics = attackerStatistics;
+            this.DefenderStatistics = defenderStatistics;
         }
 
         public int CountOfFights { get; }
 
-        public FighterStatistics FirstFighterStatistics { get; }
+        public FighterStatistics AttackerStatistics { get; }
 
-        public FighterStatistics SecondFighterStatistics { get; }
+        public FighterStatistics DefenderStatistics { get; }
     }
 }

@@ -35,7 +35,7 @@ namespace WhimFights.Tests
 
             var statistics = (FightStatistics)sut.Responces.First();
 
-            var actualVictoriesCount = statistics.Statistics.FirstFighterStatistics.Victories + statistics.Statistics.SecondFighterStatistics.Victories;
+            var actualVictoriesCount = statistics.Statistics.AttackerStatistics.Victories + statistics.Statistics.DefenderStatistics.Victories;
 
             actualVictoriesCount
                 .Should()
@@ -137,7 +137,7 @@ namespace WhimFights.Tests
 
             statistics
                 .Statistics
-                .FirstFighterStatistics
+                .AttackerStatistics
                 .Victories
                 .Should()
                 .Be(expectedAttackerWins);
