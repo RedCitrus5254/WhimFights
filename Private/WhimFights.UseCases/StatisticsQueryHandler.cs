@@ -51,8 +51,8 @@
 
             return new Statistics(
                 countOfFights: query.FightsCount,
-                firstFighterStatistics: attackerFightStatistics,
-                secondFighterStatistics: defenderFightStatistics);
+                attackerStatistics: attackerFightStatistics,
+                defenderStatistics: defenderFightStatistics);
         }
 
         private Fighter CreateFighter(
