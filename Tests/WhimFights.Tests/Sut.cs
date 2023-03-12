@@ -1,6 +1,8 @@
 ﻿namespace WhimFights.Tests
 {
+    using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Threading.Tasks;
     using WhimFights.UseCases;
     using WhimFights.UseCases.Infrastructure;
@@ -9,18 +11,15 @@
     public class Sut
     {
         private readonly SaveCharacterCommand.IHandler saveCharacterCommandHandler;
-        private readonly GetCharacterQuery.IHandler getCharacterQueryHandler;
         private readonly GetAllCharactersQuery.IHandler getAllCharactersQueryHandler;
         private readonly StatisticsQuery.IHandler statisticsQueryHandler;
 
         private Sut(
             SaveCharacterCommand.IHandler saveCharacterCommandHandler,
-            GetCharacterQuery.IHandler getCharacterQueryHandler,
             GetAllCharactersQuery.IHandler getAllCharactersQueryHandler,
             StatisticsQuery.IHandler statisticsQueryHandler)
         {
             this.saveCharacterCommandHandler = saveCharacterCommandHandler;
-            this.getCharacterQueryHandler = getCharacterQueryHandler;
             this.getAllCharactersQueryHandler = getAllCharactersQueryHandler;
             this.statisticsQueryHandler = statisticsQueryHandler;
         }
@@ -30,11 +29,12 @@
         public static Sut Create(
             IDice? dice = null)
         {
-            var characterMapper = new CharacterMapper();
+            var filename = Guid.NewGuid().ToString();
+            using var fs = File.Create(filename);
+            var characterMapper = new CharacterMapper(
+                filePath: filename);
             return new Sut(
                 saveCharacterCommandHandler: new SaveCharacterCommandHandler(
-                    characterMapper: characterMapper),
-                getCharacterQueryHandler: new GetCharacterQueryHandler(
                     characterMapper: characterMapper),
                 getAllCharactersQueryHandler: new GetAllCharactersQueryHandler(
                     characterMapper: characterMapper),
@@ -59,20 +59,11 @@
             switch (stimulus)
             {
                 case SaveCharacter saveCharacter:
-                    this.saveCharacterCommandHandler
+                    await this.saveCharacterCommandHandler
                         .Handle(
                             command: new SaveCharacterCommand(
-                                character: saveCharacter.Character));
-                    break;
-                case ChangeCharacter:
-                    break;
-
-                case GetCharacter getCharacter:
-                    var character = this.getCharacterQueryHandler
-                        .Handle(
-                            query: new GetCharacterQuery(
-                                id: getCharacter.CharacterId));
-                    this.Responces.Add(new ReceivedCharacter(character));
+                                character: saveCharacter.Character))
+                        .ConfigureAwait(false);
                     break;
 
                 case GetFightResult getFightResult:
@@ -89,9 +80,10 @@
                     break;
 
                 case GetAllCharacters:
-                    var characters = this.getAllCharactersQueryHandler
+                    var characters = await this.getAllCharactersQueryHandler
                         .Handle(
-                            query: new GetAllCharactersQuery());
+                            query: new GetAllCharactersQuery())
+                        .ConfigureAwait(false);
 
                     this.Responces.Add(
                         item: new ReceivedCharacters(

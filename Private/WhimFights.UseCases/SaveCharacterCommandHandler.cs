@@ -1,5 +1,6 @@
 ﻿namespace WhimFights.UseCases
 {
+    using System.Threading.Tasks;
     using WhimFights.UseCases.Ports;
 
     public class SaveCharacterCommandHandler
@@ -13,11 +14,11 @@
             this.characterMapper = characterMapper;
         }
 
-        public void Handle(
+        public Task Handle(
             SaveCharacterCommand command)
         {
-            this.characterMapper
-                .Save(
+            return this.characterMapper
+                .SaveOneAsync(
                     character: command.Character);
         }
     }

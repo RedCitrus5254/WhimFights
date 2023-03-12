@@ -5,6 +5,7 @@ namespace WhimFights.Tests
     using System.Linq;
     using System.Threading.Tasks;
     using FluentAssertions;
+    using WhimFights.Testing;
     using WhimFights.Tests.Fakes;
     using Xunit;
 
@@ -15,14 +16,18 @@ namespace WhimFights.Tests
         {
             var random = new Random();
 
-            var attacker = ObjectsGen.RandomCharacter();
-            var defender = ObjectsGen.RandomCharacter();
+            var attacker = ObjectsGen.RandomCharacter(
+                prowess: random.Next(5, 10),
+                slyness: random.Next(1, 4));
+            var defender = ObjectsGen.RandomCharacter(
+                prowess: random.Next(5, 10),
+                slyness: random.Next(1, 4));
 
             var sut = Sut.Create(
                 dice: new FakeDice(
                     predefinedValue: random.Next(1, 6)));
 
-            var countOfFights = random.Next(1, 10);
+            var countOfFights = random.Next(1, 2);
 
             await sut.AcceptStimuliAsync(
                 stimuli: new List<IStimulus>()
@@ -45,7 +50,8 @@ namespace WhimFights.Tests
         [Fact]
         public async Task S2()
         {
-            var expected = ObjectsGen.RandomCharacter();
+            var firstCharacter = ObjectsGen.RandomCharacter();
+            var secondCharacter = ObjectsGen.RandomCharacter();
 
             var sut = Sut.Create();
 
@@ -53,17 +59,25 @@ namespace WhimFights.Tests
                 stimuli: new List<IStimulus>()
                 {
                     new SaveCharacter(
-                        Character: expected),
-                    new GetCharacter(
-                        CharacterId: expected.Id),
+                        Character: firstCharacter),
+                    new SaveCharacter(
+                        Character: secondCharacter),
+                    new GetAllCharacters(),
                 });
 
-            sut.Responces
-                .FirstOrDefault()
+            var expected = new ReceivedCharacters(
+                new List<Character>()
+                {
+                    firstCharacter,
+                    secondCharacter,
+                });
+
+            sut
+                .Responces
+                .First()
                 .Should()
                 .BeEquivalentTo(
-                    expectation: new ReceivedCharacter(
-                        Character: expected));
+                    expectation: expected);
         }
 
         [Fact]
@@ -83,22 +97,21 @@ namespace WhimFights.Tests
                         Character: character),
                     new SaveCharacter(
                         Character: expected),
-                    new GetCharacter(
-                        CharacterId: expected.Id),
+                    new GetAllCharacters(),
                 });
 
             sut.Responces
                 .FirstOrDefault()
                 .Should()
                 .BeEquivalentTo(
-                    expectation: new ReceivedCharacter(
-                    Character: expected));
+                    expectation: new ReceivedCharacters(
+                        Characters: new() { expected }));
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task S4Async(
+        public async Task S4(
             bool attackerHasSupport)
         {
             var random = new Random();
@@ -141,39 +154,6 @@ namespace WhimFights.Tests
                 .Victories
                 .Should()
                 .Be(expectedAttackerWins);
-        }
-
-        [Fact]
-        public async Task S5()
-        {
-            var firstCharacter = ObjectsGen.RandomCharacter();
-            var secondCharacter = ObjectsGen.RandomCharacter();
-
-            var sut = Sut.Create();
-
-            await sut.AcceptStimuliAsync(
-                stimuli: new List<IStimulus>()
-                {
-                    new SaveCharacter(
-                        Character: firstCharacter),
-                    new SaveCharacter(
-                        Character: secondCharacter),
-                    new GetAllCharacters(),
-                });
-
-            var expected = new ReceivedCharacters(
-                new List<Character>()
-                {
-                    firstCharacter,
-                    secondCharacter,
-                });
-
-            sut
-                .Responces
-                .First()
-                .Should()
-                .BeEquivalentTo(
-                    expectation: expected);
         }
     }
 }

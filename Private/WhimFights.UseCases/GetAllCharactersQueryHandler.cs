@@ -1,6 +1,7 @@
 ﻿namespace WhimFights.UseCases
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using WhimFights.UseCases.Ports;
 
     public class GetAllCharactersQueryHandler : GetAllCharactersQuery.IHandler
@@ -13,11 +14,11 @@
             this.characterMapper = characterMapper;
         }
 
-        public List<Character> Handle(
+        public Task<List<Character>> Handle(
             GetAllCharactersQuery query)
         {
             return this.characterMapper
-                .GetAll();
+                .GetAllAsync();
         }
     }
 }

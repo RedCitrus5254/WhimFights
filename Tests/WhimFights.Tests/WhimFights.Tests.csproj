@@ -23,6 +23,7 @@
       <ProjectReference Include="..\..\Private\WhimFights.UseCases.Infrastructure\WhimFights.UseCases.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Private\WhimFights.UseCases\WhimFights.UseCases.csproj" />
       <ProjectReference Include="..\..\Private\WhimFights\WhimFights.csproj" />
+      <ProjectReference Include="..\..\Tests\WhimFights.Testing\WhimFights.Testing.csproj" />
     </ItemGroup>
 
 </Project>

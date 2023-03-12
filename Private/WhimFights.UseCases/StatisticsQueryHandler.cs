@@ -17,6 +17,20 @@
         public async Task<Statistics> HandleAsync(
             StatisticsQuery query)
         {
+            if (query.Attaker.Prowess + 6 <= query.Defender.Slyness + 1 && query.Defender.Prowess + 6 > query.Attaker.Slyness + 1)
+            {
+                return new Statistics(
+                    countOfFights: 0,
+                    firstFighterStatistics: new FighterStatistics(
+                        fighterId: query.Attaker.Id,
+                        victories: 0,
+                        averageHealth: -1),
+                    secondFighterStatistics: new FighterStatistics(
+                        fighterId: query.Defender.Id,
+                        victories: 0,
+                        averageHealth: -1));
+            }
+
             var tasks = Enumerable.Range(0, query.FightsCount).Select(
                 _ => Task.Run(() =>
                     this.GetFighterStatistics(
@@ -141,7 +155,7 @@
             }
         }
 
-        private class Fighter
+        private sealed class Fighter
         {
             public Fighter(
                 string id,
@@ -190,7 +204,7 @@
             }
         }
 
-        private class OneFightStatistics
+        private sealed class OneFightStatistics
         {
             public OneFightStatistics(
                 string winnerId,
