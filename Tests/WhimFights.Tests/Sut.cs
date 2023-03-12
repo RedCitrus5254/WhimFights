@@ -11,18 +11,15 @@
     public class Sut
     {
         private readonly SaveCharacterCommand.IHandler saveCharacterCommandHandler;
-        private readonly GetCharacterQuery.IHandler getCharacterQueryHandler;
         private readonly GetAllCharactersQuery.IHandler getAllCharactersQueryHandler;
         private readonly StatisticsQuery.IHandler statisticsQueryHandler;
 
         private Sut(
             SaveCharacterCommand.IHandler saveCharacterCommandHandler,
-            GetCharacterQuery.IHandler getCharacterQueryHandler,
             GetAllCharactersQuery.IHandler getAllCharactersQueryHandler,
             StatisticsQuery.IHandler statisticsQueryHandler)
         {
             this.saveCharacterCommandHandler = saveCharacterCommandHandler;
-            this.getCharacterQueryHandler = getCharacterQueryHandler;
             this.getAllCharactersQueryHandler = getAllCharactersQueryHandler;
             this.statisticsQueryHandler = statisticsQueryHandler;
         }
@@ -38,8 +35,6 @@
                 filePath: filename);
             return new Sut(
                 saveCharacterCommandHandler: new SaveCharacterCommandHandler(
-                    characterMapper: characterMapper),
-                getCharacterQueryHandler: new GetCharacterQueryHandler(
                     characterMapper: characterMapper),
                 getAllCharactersQueryHandler: new GetAllCharactersQueryHandler(
                     characterMapper: characterMapper),
@@ -69,18 +64,6 @@
                             command: new SaveCharacterCommand(
                                 character: saveCharacter.Character))
                         .ConfigureAwait(false);
-                    break;
-                case ChangeCharacter:
-                    break;
-
-                case GetCharacter getCharacter:
-                    var character = await this.getCharacterQueryHandler
-                        .Handle(
-                            query: new GetCharacterQuery(
-                                id: getCharacter.CharacterId))
-                        .ConfigureAwait(false);
-
-                    this.Responces.Add(new ReceivedCharacter(character));
                     break;
 
                 case GetFightResult getFightResult:

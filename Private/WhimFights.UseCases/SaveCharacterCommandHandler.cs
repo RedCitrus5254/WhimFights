@@ -18,7 +18,7 @@
             SaveCharacterCommand command)
         {
             return this.characterMapper
-                .SaveAsync(
+                .SaveOneAsync(
                     character: command.Character);
         }
     }

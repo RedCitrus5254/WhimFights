@@ -155,7 +155,7 @@
             }
         }
 
-        private class Fighter
+        private sealed class Fighter
         {
             public Fighter(
                 string id,
@@ -204,7 +204,7 @@
             }
         }
 
-        private class OneFightStatistics
+        private sealed class OneFightStatistics
         {
             public OneFightStatistics(
                 string winnerId,

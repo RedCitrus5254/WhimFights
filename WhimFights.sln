@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# 
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{F28949A3-D03B-4827-B75D-3566041F1900}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Private", "Private", "{E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}"
@@ -15,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.UseCases", "Private\WhimFights.UseCases\WhimFights.UseCases.csproj", "{18D67A72-47F1-4C39-85D7-61F296F6206D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.Tests", "Tests\WhimFights.Tests\WhimFights.Tests.csproj", "{D78C6EE6-4625-4ACC-8214-1A03367D16E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.UseCases.Infrastructure.Tests", "Tests\WhimFights.UseCases.Infrastructure.Tests\WhimFights.UseCases.Infrastructure.Tests.csproj", "{33F45DA5-8086-42E0-8660-27DA93BB65C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhimFights.Testing", "Tests\WhimFights.Testing\WhimFights.Testing.csproj", "{BB580BF7-4F7A-444C-844F-B4FC248AEE65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +47,14 @@ Global
 		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D78C6EE6-4625-4ACC-8214-1A03367D16E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33F45DA5-8086-42E0-8660-27DA93BB65C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33F45DA5-8086-42E0-8660-27DA93BB65C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33F45DA5-8086-42E0-8660-27DA93BB65C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33F45DA5-8086-42E0-8660-27DA93BB65C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB580BF7-4F7A-444C-844F-B4FC248AEE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB580BF7-4F7A-444C-844F-B4FC248AEE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB580BF7-4F7A-444C-844F-B4FC248AEE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB580BF7-4F7A-444C-844F-B4FC248AEE65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D59BFBA4-CEA8-4146-B0D2-D50FA318A4BE} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
@@ -49,5 +62,7 @@ Global
 		{D9582DA1-195E-4853-AC74-33CBE3CC106D} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
 		{18D67A72-47F1-4C39-85D7-61F296F6206D} = {E32BDAA1-CC04-494A-B2F1-F128F59C1EC2}
 		{D78C6EE6-4625-4ACC-8214-1A03367D16E6} = {9BB768A7-1296-45A1-9BD4-46A031BEA81E}
+		{33F45DA5-8086-42E0-8660-27DA93BB65C1} = {9BB768A7-1296-45A1-9BD4-46A031BEA81E}
+		{BB580BF7-4F7A-444C-844F-B4FC248AEE65} = {9BB768A7-1296-45A1-9BD4-46A031BEA81E}
 	EndGlobalSection
 EndGlobal

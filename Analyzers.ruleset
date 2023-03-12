@@ -41,5 +41,9 @@
 
         <!-- AV1008: Class 'ContactsSegmentQueryHandlerFactory' should be non-static or its name should be suffixed with 'Extensions'. -->
         <Rule Id="AV1008" Action="None" />
+        <!-- AV1580:  -->
+        <Rule Id="AV1580" Action="None" />
+        <!-- AV1553: Optional parameter 'id' of type 'string?' has default value 'null' -->
+        <Rule Id="AV1553" Action="None" />
     </Rules>
 </RuleSet>

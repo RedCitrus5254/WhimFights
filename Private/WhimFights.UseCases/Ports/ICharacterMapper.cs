@@ -5,11 +5,8 @@
 
     public interface ICharacterMapper
     {
-        Task SaveAsync(
+        Task SaveOneAsync(
             Character character);
-
-        Task<Character> GetAsync(
-            string id);
 
         Task<List<Character>> GetAllAsync();
     }
