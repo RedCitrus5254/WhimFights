@@ -8,6 +8,10 @@
     {
         private readonly IDice dice;
 
+        private const int DiceMaxValue = 6;
+
+        private const int DiceMinValue = 1;
+
         public StatisticsQueryHandler(
             IDice dice)
         {
@@ -17,15 +21,16 @@
         public async Task<Statistics> HandleAsync(
             StatisticsQuery query)
         {
-            if (query.Attaker.Prowess + 6 <= query.Defender.Slyness + 1 && query.Defender.Prowess + 6 > query.Attaker.Slyness + 1)
+            if (query.Attaker.Prowess + DiceMaxValue <= query.Defender.Slyness + DiceMinValue &&
+                query.Defender.Prowess + DiceMaxValue > query.Attaker.Slyness + DiceMinValue)
             {
                 return new Statistics(
                     countOfFights: 0,
-                    firstFighterStatistics: new FighterStatistics(
+                    attackerStatistics: new FighterStatistics(
                         fighterId: query.Attaker.Id,
                         victories: 0,
                         averageHealth: -1),
-                    secondFighterStatistics: new FighterStatistics(
+                    defenderStatistics: new FighterStatistics(
                         fighterId: query.Defender.Id,
                         victories: 0,
                         averageHealth: -1));
